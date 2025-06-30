@@ -8,7 +8,10 @@ def send_payload(client: mqtt.Client, dummys:int):
     with open('topics.json', 'r') as payload_file:
         payload = json.load(payload_file)
 
-    payload = modify_timestamp(payload=payload)
+    payload = modify_timestamp(payload=payload, offset=60)
+
+    with open('topics.json', 'w', encoding='utf-8') as payload_file:
+        json.dump(payload, payload_file, indent=4)
 
     for device in range(1,dummys+1):
 
@@ -43,6 +46,7 @@ def modify_serial(payload: dict)->dict:
     payload["Topics"] = new_topics
     return payload
 
+def modify_timestamp(payload:dict, offset:int)->dict:
 
     '''
         Increments the timestamp (`ts`) by 1 for each topic in the payload.
@@ -57,7 +61,7 @@ def modify_serial(payload: dict)->dict:
 
     for key, value in payload["Topics"].items():
         
-        value['ts'] = value['ts'] + 1
+        value['ts'] = value['ts'] + offset
 
     return payload
 
