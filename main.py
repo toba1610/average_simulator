@@ -29,6 +29,8 @@ if __name__ == "__main__":
 
     client.connect(config["IP"], config["Port"])
 
-    threading.Timer(1.0, send_payload, args=(client,)).start()
+    interval = config['interval']
+
+    threading.Timer(interval, send_payload, args=(client,config['modules'])).start()
 
     client.loop_start()
