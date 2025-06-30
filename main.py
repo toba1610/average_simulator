@@ -3,11 +3,22 @@ import threading
 import json
 
 
-def send_payload(client: mqtt.Client):
+def send_payload(client: mqtt.Client, dummys:int):
 
-    with open('payload.json', 'r') as payload_file:
+    with open('topics.json', 'r') as payload_file:
         payload = json.load(payload_file)
 
+    payload = modify_timestamp(payload=payload)
+
+    for device in range(1,dummys+1):
+
+        payload = modify_serial(payload=payload)
+
+        for key, value in payload["Topics"].items():
+
+            client.publish(key, json.dumps(value), qos=1)
+
+    threading.Timer(1.0, send_payload, args=(client, dummys,)).start()
 def modify_serial(payload: dict)->dict:
 
     key:str
