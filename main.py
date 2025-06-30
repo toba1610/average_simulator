@@ -5,6 +5,17 @@ import json
 
 def send_payload(client: mqtt.Client, dummys:int):
 
+    '''
+        Handels the modification of the payload and starts the next timer for the next message
+
+        Args:
+            client (mqtt.Client): The mqtt connection
+            dummys (int): Number of dummys for simulating devices
+
+        Returns:
+            None
+    '''
+
     with open('topics.json', 'r') as payload_file:
         payload = json.load(payload_file)
 
