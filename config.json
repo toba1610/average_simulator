@@ -4,7 +4,7 @@
     "Port": 8080,
     "username": "",
     "password": "",
-    "intervall": 1,
+    "interval": 1,
     "modules": 1
 
 }
