@@ -19,7 +19,18 @@ def send_payload(client: mqtt.Client, dummys:int):
             client.publish(key, json.dumps(value), qos=1)
 
     threading.Timer(1.0, send_payload, args=(client, dummys,)).start()
+
 def modify_serial(payload: dict)->dict:
+
+    '''
+        Increments the serial_number (`sn`) by 1 for every entry in config.json parameter 'modules'.
+
+        Args:
+            payload (dict): The original payload dictionary
+
+        Returns:
+            dict: The modified payload with updated serial.
+    '''
 
     key:str
     new_topics = {}
@@ -32,7 +43,17 @@ def modify_serial(payload: dict)->dict:
     payload["Topics"] = new_topics
     return payload
 
-def modify_timestamp(payload:dict)->dict:
+
+    '''
+        Increments the timestamp (`ts`) by 1 for each topic in the payload.
+
+        Args:
+            payload (dict): The original payload dictionary
+
+        Returns:
+            dict: The modified payload with updated timestamps.
+    '''
+
 
     for key, value in payload["Topics"].items():
         
