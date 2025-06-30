@@ -9,11 +9,11 @@ To run the script to JSON are needed:
 ## configs.json
 
 * IP: STRING = The IP-Adress of the used broker. Be causios there is no input validation
-* Port: STRING = The Port used by the mqtt broker
+* Port: INTEGER = The Port used by the mqtt broker
 * username: STRING = If an autantification is used
 * password: STRING = If an autantification is used
 * interval: FLOAT = The interval in which the dummy message should be send
-* modules: INTEGER = Defines how often a the messages should be send with differents serial each interval
+* modules: INTEGER = Defines how often the messages should be send with differents serial each interval
 
 ### Example
 
@@ -29,8 +29,8 @@ To run the script to JSON are needed:
 ```
 ## topics.json
 
-This json contains all the topic whichshould be send each interval.
-The json is structured as an array of objects. The objects contains the topic path as key and the payload as value.
+This json contains all the topics which should be sent each interval.
+The json is structured as an array of objects. The objects contain the topic path as key and the payload as value.
 
 ### Example:
 

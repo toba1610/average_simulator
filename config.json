@@ -1,7 +1,7 @@
 {
 
     "IP": "192.168.178.42",
-    "Port": 8080,
+    "Port": 1883,
     "username": "",
     "password": "",
     "interval": 1,
