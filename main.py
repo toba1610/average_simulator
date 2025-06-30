@@ -1,4 +1,6 @@
 import paho.mqtt.client as mqtt
+from paho.mqtt.enums import CallbackAPIVersion
+
 import threading
 import json
 
@@ -82,7 +84,7 @@ if __name__ == "__main__":
     with open('config.json', 'r') as config_file:
         config = json.load(config_file)
 
-    client = mqtt.Client()
+    client = mqtt.Client(CallbackAPIVersion.VERSION2)
 
     if config.get("username") and config.get("password"):
         client.username_pw_set(config["username"], config["password"])
