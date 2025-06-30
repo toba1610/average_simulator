@@ -20,14 +20,14 @@ def modify_serial(payload: dict)->dict:
         new_topics[new_key] = value
     payload["Topics"] = new_topics
     return payload
+
+def modify_timestamp(payload:dict)->dict:
+
     for key, value in payload["Topics"].items():
+        
+        value['ts'] = value['ts'] + 1
 
-        client.publish(key, value, qos=1)
-
-    threading.Timer(1.0, send_payload, args=(client,)).start()
-
-
-
+    return payload
 
 if __name__ == "__main__":
     
