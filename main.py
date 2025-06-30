@@ -8,6 +8,18 @@ def send_payload(client: mqtt.Client):
     with open('payload.json', 'r') as payload_file:
         payload = json.load(payload_file)
 
+def modify_serial(payload: dict)->dict:
+
+    key:str
+    new_topics = {}
+    for key, value in payload["Topics"].items():
+        key_seperated = key.split('/')
+        new_key = str(int(key_seperated[1]) + 1)
+        new_key = f'{key_seperated[0]}/{new_key}/{key_seperated[2]}'
+        value['sn'] = new_key
+        new_topics[new_key] = value
+    payload["Topics"] = new_topics
+    return payload
     for key, value in payload["Topics"].items():
 
         client.publish(key, value, qos=1)
