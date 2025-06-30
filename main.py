@@ -3,7 +3,7 @@ import threading
 import json
 
 
-def send_payload(client: mqtt.Client, dummys:int):
+def send_payload(client: mqtt.Client, dummys:int, delay: float):
 
     '''
         Handels the modification of the payload and starts the next timer for the next message
@@ -11,6 +11,7 @@ def send_payload(client: mqtt.Client, dummys:int):
         Args:
             client (mqtt.Client): The mqtt connection
             dummys (int): Number of dummys for simulating devices
+            delays (float): Seconds of wait time for the next message
 
         Returns:
             None
@@ -32,7 +33,7 @@ def send_payload(client: mqtt.Client, dummys:int):
 
             client.publish(key, json.dumps(value), qos=1)
 
-    threading.Timer(1.0, send_payload, args=(client, dummys,)).start()
+    threading.Timer(delay, send_payload, args=(client, dummys, delay)).start()
 
 def modify_serial(payload: dict)->dict:
 
@@ -90,6 +91,6 @@ if __name__ == "__main__":
 
     interval = config['interval']
 
-    threading.Timer(interval, send_payload, args=(client,config['modules'])).start()
+    threading.Timer(interval, send_payload, args=(client,config['modules'], interval)).start()
 
     client.loop_start()
