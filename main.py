@@ -3,7 +3,9 @@ from paho.mqtt.enums import CallbackAPIVersion
 
 import threading
 import json
+import re
 
+IPV4_PATTERN = "^(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
 
 def send_payload(client: mqtt.Client, dummys:int, delay: float):
 
@@ -34,6 +36,7 @@ def send_payload(client: mqtt.Client, dummys:int, delay: float):
         for key, value in payload["Topics"].items():
 
             client.publish(key, json.dumps(value), qos=1)
+            print(f'Message send')
 
     threading.Timer(delay, send_payload, args=(client, dummys, delay)).start()
 
@@ -79,6 +82,8 @@ def modify_timestamp(payload:dict, offset:int)->dict:
 
     return payload
 
+
+
 if __name__ == "__main__":
     
     with open('config.json', 'r') as config_file:
@@ -89,7 +94,14 @@ if __name__ == "__main__":
     if config.get("username") and config.get("password"):
         client.username_pw_set(config["username"], config["password"])
 
-    client.connect(config["IP"], config["Port"])
+    if re.match(IPV4_PATTERN,config["IP"]):
+        if config['Port'] in range(1, 65535):
+            client.connect(config["IP"], config["Port"])
+            print(f'Connected to Broker')
+        else:
+            print(f'Port in config.json not valid: {config["Port"]}')
+    else:
+        print(f'IP in config.json not valid: {config["IP"]}')
 
     interval = config['interval']
 
