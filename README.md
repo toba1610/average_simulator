@@ -8,19 +8,23 @@ To run the script to JSON are needed:
 
 ## configs.json
 
-* IP: STRING = The IP-Adress of the used broker. Be causios there is no input validation
-* Port: INTEGER = The Port used by the mqtt broker
-* username: STRING = If an autantification is used
-* password: STRING = If an autantification is used
-* interval: FLOAT = The interval in which the dummy message should be send
-* modules: INTEGER = Defines how often the messages should be send with differents serial each interval
+Be causios there is no input validation for any Parameter.
+
+| Parameter        | Type       | Explanation  |
+| ------------- |:-------------:| :-----|
+| IP      | STRING | The IP-Adress of the used broker |
+| Port      | INTEGER      |   The Port used by the mqtt broker |
+| username | STRING      |    If an autantification is used, else "" |
+| password | STRING      |    If an autantification is used, else "" |
+| interval | FLOAT      |    The interval in which the dummy message should be send |
+| modules | INTEGER      |    Defines how often the messages should be send with differents serial each interval |
 
 ### Example
 
-```yaml
+```json
     {
         "IP": "192.168.178.42",
-        "Port": 8080,
+        "Port": 1883,
         "username": "",
         "password": "",
         "interval": 1,
@@ -34,7 +38,7 @@ The json is structured as an array of objects. The objects contain the topic pat
 
 ### Example:
 
-```yaml
+```json
 "Topics": {
         "EM3X/100009/EMAVG": {
             "avi": [
