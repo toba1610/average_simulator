@@ -29,6 +29,7 @@ Be causios there is no input validation for any Parameter.
         "username": "",
         "password": "",
         "interval": 1,
+        "offset": 60,
         "modules": 1
     }
 ```
