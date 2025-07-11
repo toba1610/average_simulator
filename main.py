@@ -23,8 +23,11 @@ def send_payload(client: mqtt.Client, dummys:int, delay: float):
 
     with open('topics.json', 'r') as payload_file:
         payload = json.load(payload_file)
+    
+    with open('config.json', 'r') as config_file:
+        config = json.load(config_file)
 
-    payload = modify_timestamp(payload=payload, offset=60)
+    payload = modify_timestamp(payload=payload, offset=config['offset'])
 
     with open('topics.json', 'w', encoding='utf-8') as payload_file:
         json.dump(payload, payload_file, indent=4)

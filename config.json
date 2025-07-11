@@ -5,6 +5,7 @@
     "username": "",
     "password": "",
     "interval": 1,
+    "offset": 60,
     "modules": 1
 
 }

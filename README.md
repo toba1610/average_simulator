@@ -16,7 +16,8 @@ Be causios there is no input validation for any Parameter.
 | Port      | INTEGER      |   The Port used by the mqtt broker |
 | username | STRING      |    If an authentication is used, else "" |
 | password | STRING      |    If an authentication is used, else "" |
-| interval | FLOAT      |    The interval in which the dummy message should be send |
+| interval | FLOAT      |    The interval in seconds in which the dummy message should be send |
+| offset | INTEGER      |    The interval in seconds in which the timestamp will be modfified |
 | modules | INTEGER      |    Defines how often the messages should be send with differents serial each interval |
 
 ### Example
