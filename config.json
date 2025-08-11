@@ -1,11 +1,11 @@
 {
 
-    "IP": "192.168.178.42",
-    "Port": 1883,
-    "username": "",
-    "password": "",
-    "interval": 1,
-    "offset": 60,
+    "IP": ["192.168.0.102","192.168.0.103","192.168.0.104","192.168.0.105","192.168.0.106","192.168.0.107","192.168.0.108"],
+    "Port": 50883,
+    "username": "plv2",
+    "password": "sYmpPNExSYp3AJYQFdH85oeQCbBqgYpqqMYeg9pa",
+    "interval": 0.1,
+    "offset": 600,
     "modules": 1
 
 }
